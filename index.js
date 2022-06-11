@@ -23,46 +23,56 @@ var transporter = nodemailer.createTransport({
 });
 
 app.post("/", (req, res) => {
-  const title = `${req.body.site[13]}_${Date.now()}.jpg`;
-  const timeInterval = req.body.timeInterval * 3600000;
-  const setDays = req.body.days;
+  const timeInterval = req.body.timeInterval;
+  const amount = req.body.amount;
 
-  (async () => {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(req.body.site);
-    let img = await page.screenshot({
-      path: title,
-    });
-    await browser.close();
+  let counter = 0;
 
-    var mailOptions = {
-      from: process.env.Email,
-      to: req.body.email,
-      subject: "Sending Email using Node.js",
-      text: "That was easy!",
-      attachments: [
-        {
-          filename: title,
-          path: title,
-        },
-      ],
-    };
+  let looper = setInterval(() => {
+    const title = `${req.body.site[13]}_${Date.now()}.jpg`;
+    counter++;
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-
-      fs.unlink(title, (err) => {
-        if (err) {
-          console.error(err);
-        }
+    (async () => {
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+      await page.goto(req.body.site);
+      await page.screenshot({
+        path: title,
       });
-    });
-  })();
+      await browser.close();
+
+      var mailOptions = {
+        from: process.env.Email,
+        to: req.body.email,
+        subject: "Sending Email using Node.js",
+        text: "That was easy!",
+        attachments: [
+          {
+            filename: title,
+            path: title,
+          },
+        ],
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+
+        fs.unlink(title, (err) => {
+          if (err) {
+            console.error(err);
+          }
+        });
+      });
+    })();
+
+    if (counter >= amount) {
+      clearInterval(looper);
+    }
+  }, timeInterval);
 
   res.send("email sent");
 });
