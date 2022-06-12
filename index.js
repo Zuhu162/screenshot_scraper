@@ -11,7 +11,7 @@ const port = process.env.PORT;
 console.log(process.env.Email);
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.send("WebScra");
 });
 
 var transporter = nodemailer.createTransport({
@@ -22,30 +22,38 @@ var transporter = nodemailer.createTransport({
   },
 });
 
+//parameters
+//time interval, amount, site, width(default 1920), height(default 1080), fullpage(boolean), email, format(default png)
 app.post("/", (req, res) => {
   const timeInterval = req.body.timeInterval;
   const amount = req.body.amount;
 
-  let counter = 0;
-
-  let looper = setInterval(() => {
-    const title = `${req.body.site[13]}_${Date.now()}.jpg`;
-    counter++;
+  const screenshotter = () => {
+    const title = `${req.body.site[13]}_${Date.now()}.${
+      req.body.format || "png"
+    }`;
 
     (async () => {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
       await page.goto(req.body.site);
+      await page.setViewport({
+        width: req.body.width || 1920,
+        height: req.body.height || 1080,
+        deviceScaleFactor: 1,
+      });
       await page.screenshot({
         path: title,
+        fullPage: req.body.fullpage || false,
       });
+
       await browser.close();
 
       var mailOptions = {
         from: process.env.Email,
         to: req.body.email,
-        subject: "Sending Email using Node.js",
-        text: "That was easy!",
+        subject: "Screenshotter",
+        text: title,
         attachments: [
           {
             filename: title,
@@ -68,11 +76,22 @@ app.post("/", (req, res) => {
         });
       });
     })();
+  };
 
-    if (counter >= amount) {
-      clearInterval(looper);
-    }
-  }, timeInterval);
+  screenshotter();
+
+  let counter = 1;
+
+  if (counter <= amount) {
+    let looper = setInterval(() => {
+      counter++;
+      screenshotter();
+
+      if (counter >= amount) {
+        clearInterval(looper);
+      }
+    }, timeInterval);
+  }
 
   res.send("email sent");
 });
