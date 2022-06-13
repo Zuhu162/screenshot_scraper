@@ -24,7 +24,11 @@ var transporter = nodemailer.createTransport({
 
 //parameters
 //time interval, amount, site, width(default 1920), height(default 1080), fullpage(boolean), email, format(default png)
-app.post("/", cors(), (req, res) => {
+app.get("/api", (req, res) => {
+  res.send("This is the api");
+});
+
+app.post("/api", cors(), (req, res) => {
   const timeInterval = req.body.timeInterval * 60000;
   const amount = req.body.amount;
 

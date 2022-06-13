@@ -20,7 +20,7 @@ function UserInput() {
       timeInterval: timeInterval,
     };
     try {
-      const res = await axios.post("/", userInfo);
+      const res = await axios.post("/api", userInfo);
       console.log(userInfo);
     } catch (err) {
       console.log(err);
