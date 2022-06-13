@@ -20,7 +20,7 @@ function UserInput() {
       timeInterval: timeInterval,
     };
     try {
-      const res = await axios.post("http://localhost:5000/", userInfo);
+      const res = await axios.post("/", userInfo);
       console.log(userInfo);
     } catch (err) {
       console.log(err);
