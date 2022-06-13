@@ -14,10 +14,6 @@ app.use(express.json());
 const port = process.env.PORT;
 console.log(process.env.Email);
 
-app.get("/", cors(), (req, res) => {
-  res.send("WebScra");
-});
-
 var transporter = nodemailer.createTransport({
   service: "hotmail",
   auth: {
