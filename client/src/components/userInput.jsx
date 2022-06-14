@@ -20,7 +20,10 @@ function UserInput() {
       timeInterval: timeInterval,
     };
     try {
-      const res = await axios.post("/api", userInfo);
+      const res = await axios.post(
+        "https://screenshot-scraper123.herokuapp.com/api/ss",
+        userInfo
+      );
       console.log(userInfo);
     } catch (err) {
       console.log(err);
