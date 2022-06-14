@@ -34,7 +34,7 @@ app.post("/api/ss", cors(), (req, res) => {
 
   const screenshotter = () => {
     const title = `${req.body.site[13]}_${Date.now()}.${
-      req.body.format || "png"
+      req.body.format || "jpg"
     }`;
 
     (async () => {
@@ -43,12 +43,16 @@ app.post("/api/ss", cors(), (req, res) => {
         args: ["--no-sandbox"],
       });
       const page = await browser.newPage();
-      await page.goto(req.body.site);
-      await page.setViewport({
-        width: req.body.width || 1920,
-        height: req.body.height || 1080,
-        deviceScaleFactor: 1,
+      await page.goto(req.body.site, {
+        waitUntil: "networkidle2",
       });
+      setTimeout(async () => {
+        await page.setViewport({
+          width: req.body.width || 1920,
+          height: req.body.height || 1080,
+          deviceScaleFactor: 1,
+        });
+      }, 5000);
       await page.screenshot({
         path: title,
         fullPage: req.body.fullpage || false,
