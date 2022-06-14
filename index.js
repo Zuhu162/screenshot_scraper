@@ -39,7 +39,8 @@ app.post("/api/ss", cors(), (req, res) => {
 
     (async () => {
       const browser = await puppeteer.launch({
-        ignoreDefaultArgs: ["--disable-extensions"],
+        headless: true,
+        args: ["--no-sandbox"],
       });
       const page = await browser.newPage();
       await page.goto(req.body.site, {
