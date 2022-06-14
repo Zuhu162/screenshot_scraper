@@ -43,9 +43,7 @@ app.post("/api/ss", cors(), (req, res) => {
         args: ["--no-sandbox"],
       });
       const page = await browser.newPage();
-      await page.goto(req.body.site, {
-        waitUntil: "networkidle2",
-      });
+      await page.goto(req.body.site);
       setTimeout(async () => {
         await page.setViewport({
           width: req.body.width || 1920,
