@@ -60,7 +60,7 @@ form {
   padding: 10px;
   border: none;
   background-color: #2a206b;
-  color: white;
+  color: rgba(255, 255, 255, 0.803);
   border-radius: 5px;
   font-weight: bold;
   font-size: 18px;
