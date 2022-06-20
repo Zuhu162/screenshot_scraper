@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap");
 .App {
   text-align: center;
-  background-image: url(./assets/yogendra-singh-VjLFRnghnhw-unsplash.jpg);
+  background-image: url(./assets/bg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #010532;
 }
 
 .App-logo {
@@ -41,7 +43,7 @@
 }
 
 form {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.75);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -57,7 +59,7 @@ form {
   height: 50px;
   padding: 10px;
   border: none;
-  background-color: rgb(29, 95, 172);
+  background-color: #2a206b;
   color: white;
   border-radius: 5px;
   font-weight: bold;
@@ -75,7 +77,11 @@ form {
 
 input {
   border: 1px solid gray;
-  border-radius: 5px;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: white;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
 }
 
 label {
@@ -97,4 +103,15 @@ label {
 
 .input:invalid ~ .error {
   display: block;
+}
+
+.title {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5em;
+  color: white;
+}
+.subtitle {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.5em;
+  color: white;
 }
