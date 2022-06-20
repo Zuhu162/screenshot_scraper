@@ -1,10 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap");
+body {
+  background-color: #010532;
+}
 .App {
   text-align: center;
+  background-color: #010532;
   background-image: url(./assets/bg.jpg);
   background-size: cover;
+  background-position: center center; /* optional, center the image */
   background-repeat: no-repeat;
-  background-color: #010532;
 }
 
 @media (prefers-reduced-motion: no-preference) {

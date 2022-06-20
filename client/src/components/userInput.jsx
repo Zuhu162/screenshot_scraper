@@ -74,7 +74,7 @@ function UserInput() {
             }}
           >
             <p className="title" color="primary" variant="h4">
-              | SCREENSHOT SCRAPER |
+              |SCREENSHOT SCRAPER|
             </p>
           </Box>
           <FormInput
