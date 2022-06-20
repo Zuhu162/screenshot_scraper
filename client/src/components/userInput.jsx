@@ -128,17 +128,16 @@ function UserInput() {
 
               <Selecter setVal={setFormat}></Selecter>
               <FormInput
-                label="Set Page Width"
+                label="Set Page Width (px)"
                 error="Please enter a value between 1 and 3840"
                 setVal={setHeight}
                 placeholder="Page Width"
                 defaultValue={1920}
               ></FormInput>
               <FormInput
-                label="Set Page Width"
+                label="Set Page Height (px)"
                 check={true}
                 defaultValue={1080}
-                checklabel="Image Format"
                 error="Please enter a value between 1 and 2160"
                 setVal={setWidth}
                 placeholder="Page Height"
