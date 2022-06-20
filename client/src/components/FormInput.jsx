@@ -10,7 +10,7 @@ function FormInput(props) {
         placeholder={props.placeholder}
         required={true}
         pattern={props.pattern}
-        value={props.defaultValue}
+        defaultValue={props.defaultValue}
         type={props.type}
       ></input>
       <span className="error">{props.error}</span>
